@@ -1,25 +1,24 @@
-import logo from './logo.svg';
+import { useEffect, useContext } from 'react';
+import { GlobalContext } from './context/GlobalState';
+import { auth } from './firebase';
+
+import HomeScreen from './screens/homescreen/HomeScreen';
+import LoginScreen from './screens/loginscreen/LoginScreen';
+
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const { setUser, user } = useContext(GlobalContext);
+	useEffect(() => {
+		auth.onAuthStateChanged((authUser) => {
+			if (authUser) {
+				setUser(authUser);
+			} else {
+				setUser(null);
+			}
+		});
+	}, []);
+	return <div className='app'>{!user ? <LoginScreen /> : <HomeScreen />}</div>;
 }
 
 export default App;
