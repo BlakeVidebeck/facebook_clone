@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
-
-import { GlobalContext } from '../../context/GlobalState';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
@@ -17,7 +16,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import './Header.css';
 
 const Header = () => {
-	const { user } = useContext(GlobalContext);
+	const userInfo = useSelector((state) => state.userLogin.userInfo);
+	const { user } = userInfo;
+
 	return (
 		<div className='header'>
 			{/* header left */}

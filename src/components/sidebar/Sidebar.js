@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { GlobalContext } from '../../context/GlobalState';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import SidebarRow from '../sidebarrow/SidebarRow';
 
@@ -14,7 +14,8 @@ import { ExpandMoreOutlined } from '@material-ui/icons';
 import './Sidebar.css';
 
 const Sidebar = () => {
-	const { user } = useContext(GlobalContext);
+	const userInfo = useSelector((state) => state.userLogin.userInfo);
+	const { user } = userInfo;
 
 	return (
 		<div className='sidebar'>

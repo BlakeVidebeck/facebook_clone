@@ -1,12 +1,18 @@
-import React, { useContext } from 'react';
-import { GlobalContext } from '../../context/GlobalState';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { signInWithGoogle } from '../../actions/userActions';
 
 import { Button } from '@material-ui/core';
 
 import './LoginScreen.css';
 
 const LoginScreen = () => {
-	const { signIn } = useContext(GlobalContext);
+	const dispatch = useDispatch();
+
+	const signIn = (e) => {
+		e.preventDefault();
+		dispatch(signInWithGoogle());
+	};
 
 	return (
 		<div className='login'>

@@ -1,5 +1,6 @@
-import React, { useState, useContext } from 'react';
-import { GlobalContext } from '../../context/GlobalState';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+
 import db from '../../firebase';
 import firebase from 'firebase';
 
@@ -11,7 +12,8 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import './MessageSender.css';
 
 const MessageSender = () => {
-	const { user } = useContext(GlobalContext);
+	const userInfo = useSelector((state) => state.userLogin.userInfo);
+	const { user } = userInfo;
 
 	const [input, setInput] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
