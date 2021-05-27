@@ -23,7 +23,7 @@
 	border-radius: 999px;
 }
 
-.header_left > img {
+.header_left img {
 	height: 40px;
 }
 
@@ -75,8 +75,13 @@
 	align-items: center;
 }
 
-.header_info > h4 {
+.header_info h4 {
 	margin-left: 10px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
 }
 
 .header_right {

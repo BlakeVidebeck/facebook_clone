@@ -1,5 +1,13 @@
+import React, { Suspense } from 'react';
 import { useSelector } from 'react-redux';
+import {
+	BrowserRouter as Router,
+	Route,
+	Switch,
+	Redirect,
+} from 'react-router-dom';
 
+import Spinner from './components/spinner/Spinner';
 import HomeScreen from './screens/homescreen/HomeScreen';
 import LoginScreen from './screens/loginscreen/LoginScreen';
 
@@ -10,7 +18,26 @@ function App() {
 	const { userInfo } = userLogin;
 
 	return (
-		<div className='app'>{!userInfo ? <LoginScreen /> : <HomeScreen />}</div>
+		<Router>
+			<div className='app'>
+				<Switch>
+					<Suspense fallback={<Spinner />}>
+						<Route
+							exact
+							path='/login'
+							render={() => (userInfo ? <Redirect to='/' /> : <LoginScreen />)}
+						/>
+						<Route
+							exact
+							path='/'
+							render={() =>
+								!userInfo ? <Redirect to='/login' /> : <HomeScreen />
+							}
+						/>
+					</Suspense>
+				</Switch>
+			</div>
+		</Router>
 	);
 }
 

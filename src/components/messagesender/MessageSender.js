@@ -26,6 +26,7 @@ const MessageSender = () => {
 			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 			profilePic: user.photoURL,
 			username: user.displayName,
+			uid: user.uid,
 			image: imageUrl,
 		});
 

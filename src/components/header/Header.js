@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import SearchIcon from '@material-ui/icons/Search';
@@ -23,10 +24,12 @@ const Header = () => {
 		<div className='header'>
 			{/* header left */}
 			<div className='header_left'>
-				<img
-					src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png'
-					alt=''
-				/>
+				<Link to='/'>
+					<img
+						src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png'
+						alt=''
+					/>
+				</Link>
 				<div className='header_input'>
 					<SearchIcon />
 					<input placeholder='Search Facebook' type='text' />
@@ -53,10 +56,12 @@ const Header = () => {
 
 			{/* header right */}
 			<div className='header_right'>
-				<div className='header_info'>
-					<Avatar src={user.photoURL} />
-					<h4>{user.displayName}</h4>
-				</div>
+				<Link to={`user/${user.uid}`}>
+					<div className='header_info'>
+						<Avatar src={user.photoURL} />
+						<h4>{user.displayName}</h4>
+					</div>
+				</Link>
 
 				<IconButton>
 					<AddIcon />

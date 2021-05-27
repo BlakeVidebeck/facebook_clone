@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import SidebarRow from '../sidebarrow/SidebarRow';
@@ -19,7 +20,9 @@ const Sidebar = () => {
 
 	return (
 		<div className='sidebar'>
-			<SidebarRow src={user.photoURL} title={user.displayName} />
+			<Link to={`user/${user.uid}`}>
+				<SidebarRow src={user.photoURL} title={user.displayName} />
+			</Link>
 			<SidebarRow
 				Icon={LocalHospitalIcon}
 				title='COVID-19 Information Center'
