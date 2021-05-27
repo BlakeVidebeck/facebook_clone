@@ -26,3 +26,9 @@ export const signInWithGoogle = () => async (dispatch) => {
 		});
 	}
 };
+
+export const logout = () => (dispatch) => {
+	// remove the user object in local storage
+	localStorage.removeItem('userInfo');
+	dispatch({ type: 'USER_LOGOUT' });
+};
