@@ -10,6 +10,7 @@ import {
 import Spinner from './components/spinner/Spinner';
 import HomeScreen from './screens/homescreen/HomeScreen';
 import LoginScreen from './screens/loginscreen/LoginScreen';
+import UserProfile from './screens/userProfile/UserProfile';
 
 import './App.css';
 
@@ -22,6 +23,7 @@ function App() {
 			<div className='app'>
 				<Switch>
 					<Suspense fallback={<Spinner />}>
+						<Route path='/user/:userId' component={UserProfile}></Route>
 						<Route
 							exact
 							path='/login'

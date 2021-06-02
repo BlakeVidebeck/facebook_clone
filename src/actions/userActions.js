@@ -32,3 +32,25 @@ export const logout = () => (dispatch) => {
 	localStorage.removeItem('userInfo');
 	dispatch({ type: 'USER_LOGOUT' });
 };
+
+export const getUserDetails = () => async (dispatch, getState) => {
+	try {
+		dispatch({
+			type: 'USER_DETAILS_REQUEST',
+		});
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		dispatch({
+			type: 'USER_DETAILS_SUCCESS',
+			payload: userInfo,
+		});
+	} catch (error) {
+		dispatch({
+			type: 'USER_DETAILS_FAIL',
+			payload: error.message,
+		});
+	}
+};
