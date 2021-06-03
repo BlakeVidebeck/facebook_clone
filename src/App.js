@@ -12,15 +12,16 @@ import HomeScreen from './screens/homescreen/HomeScreen';
 import LoginScreen from './screens/loginscreen/LoginScreen';
 import UserProfile from './screens/userProfile/UserProfile';
 
-import './App.css';
+import { GlobalStyle } from './globalStyles';
 
-function App() {
+const App = () => {
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
 	return (
-		<Router>
-			<div className='app'>
+		<>
+			<Router>
+				<GlobalStyle />
 				<Switch>
 					<Suspense fallback={<Spinner />}>
 						<Route path='/user/:userId' component={UserProfile}></Route>
@@ -38,9 +39,9 @@ function App() {
 						/>
 					</Suspense>
 				</Switch>
-			</div>
-		</Router>
+			</Router>
+		</>
 	);
-}
+};
 
 export default App;

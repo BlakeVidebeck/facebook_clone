@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
@@ -14,53 +14,64 @@ import ForumIcon from '@material-ui/icons/Forum';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import Dropdown from '../dropdownmenu/DropdownMenu';
 
-import './Header.css';
+import { ReactComponent as Logo } from '../../assets/Facebook_f_logo.svg';
+
+import {
+	HeaderContainer,
+	HeaderLeft,
+	LogoContainer,
+	HeaderInput,
+	Input,
+	HeaderCenter,
+	HeaderOption,
+	HeaderRight,
+	HeaderInfo,
+} from './HeaderStyles';
 
 const Header = () => {
 	const userInfo = useSelector((state) => state.userLogin.userInfo);
 	const { user } = userInfo;
 
 	return (
-		<div className='header'>
+		<HeaderContainer>
 			{/* header left */}
-			<div className='header_left'>
-				<Link to='/'>
-					<img
-						src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png'
-						alt=''
-					/>
-				</Link>
-				<div className='header_input'>
+			<HeaderLeft>
+				<LogoContainer to='/'>
+					<Logo />
+				</LogoContainer>
+
+				<HeaderInput>
 					<SearchIcon />
-					<input placeholder='Search Facebook' type='text' />
-				</div>
-			</div>
+					<Input placeholder='Search Facebook' type='text' />
+				</HeaderInput>
+			</HeaderLeft>
+
 			{/* header center */}
-			<div className='header_center'>
-				<div className='header_option header_option-active'>
+			<HeaderCenter>
+				<HeaderOption active>
 					<HomeIcon fontSize='large' />
-				</div>
-				<div className='header_option'>
+				</HeaderOption>
+				<HeaderOption>
 					<FlagIcon fontSize='large' />
-				</div>
-				<div className='header_option'>
+				</HeaderOption>
+				<HeaderOption>
 					<SubscriptionsOutlinedIcon fontSize='large' />
-				</div>
-				<div className='header_option'>
+				</HeaderOption>
+				<HeaderOption>
 					<StorefrontOutlinedIcon fontSize='large' />
-				</div>
-				<div className='header_option'>
+				</HeaderOption>
+				<HeaderOption>
 					<SupervisedUserCircleIcon fontSize='large' />
-				</div>
-			</div>
+				</HeaderOption>
+			</HeaderCenter>
 
 			{/* header right */}
-			<div className='header_right'>
+			<HeaderRight>
 				<Link to={`user/${user.uid}`}>
-					<div className='header_info'>
+					<HeaderInfo>
 						<Avatar src={user.photoURL} />
 						<h4>{user.displayName}</h4>
-					</div>
+					</HeaderInfo>
 				</Link>
 
 				<IconButton>
@@ -75,8 +86,8 @@ const Header = () => {
 				<IconButton>
 					<Dropdown />
 				</IconButton>
-			</div>
-		</div>
+			</HeaderRight>
+		</HeaderContainer>
 	);
 };
 

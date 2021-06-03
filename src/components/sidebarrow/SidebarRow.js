@@ -1,15 +1,15 @@
 import { Avatar } from '@material-ui/core';
 import React from 'react';
 
-import './SidebarRow.css';
+import { SidebarRowContainer } from './SidebarRowStyles';
 
 const SidebarRow = ({ src, Icon, title }) => {
 	return (
-		<div className='sidebarRow'>
+		<SidebarRowContainer>
 			{src && <Avatar src={src} />}
 			{Icon && <Icon />}
 			<h4>{title}</h4>
-		</div>
+		</SidebarRowContainer>
 	);
 };
 

@@ -1,14 +1,13 @@
 import React from 'react';
 import { Avatar } from '@material-ui/core';
-
-import './Story.css';
+import { StoryContainer } from './StoryStyles';
 
 const Story = ({ image, profileSrc, title }) => {
 	return (
-		<div style={{ backgroundImage: `url(${image})` }} className='story'>
-			<Avatar className='story_avatar' src={profileSrc} />
+		<StoryContainer style={{ backgroundImage: `url(${image})` }}>
+			<Avatar src={profileSrc} />
 			<h4>{title}</h4>
-		</div>
+		</StoryContainer>
 	);
 };
 

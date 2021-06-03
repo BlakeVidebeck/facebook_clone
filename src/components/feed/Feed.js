@@ -4,7 +4,7 @@ import Post from '../post/Post';
 import StoryReel from '../storyreel/StoryReel';
 import db from '../../firebase';
 
-import './Feed.css';
+import { FeedContainer } from './FeedStyles';
 
 const Feed = () => {
 	const [posts, setPosts] = useState([]);
@@ -17,14 +17,14 @@ const Feed = () => {
 			);
 	}, []);
 	return (
-		<div className='feed'>
+		<FeedContainer>
 			<StoryReel />
 			<MessageSender />
 
 			{posts.map((post) => (
 				<Post key={post.id} post={post.data} />
 			))}
-		</div>
+		</FeedContainer>
 	);
 };
 

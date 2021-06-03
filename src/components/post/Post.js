@@ -8,47 +8,58 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import NearMeIcon from '@material-ui/icons/NearMe';
 import { ExpandMoreOutlined } from '@material-ui/icons';
 
-import './Post.css';
+import {
+	PostAvatar,
+	PostBottom,
+	PostContainer,
+	PostImage,
+	PostOption,
+	PostOptions,
+	PostTop,
+	PostTopInfo,
+} from './PostStyles';
 
 const Post = ({
 	post: { uid, profilePic, image, username, timestamp, message },
 }) => {
 	return (
-		<div className='post'>
-			<div className='post_top'>
-				<Avatar src={profilePic} className='post_avatar' />
-				<div className='post_topInfo'>
+		<PostContainer>
+			<PostTop>
+				<PostAvatar>
+					<Avatar src={profilePic} />
+				</PostAvatar>
+				<PostTopInfo>
 					<Link to={`user/${uid}`}>
 						<h3>{username}</h3>
 					</Link>
 					<p>{new Date(timestamp?.toDate()).toUTCString()}</p>
-				</div>
-			</div>
+				</PostTopInfo>
+			</PostTop>
 
-			<div className='post_bottom'>
+			<PostBottom>
 				<p>{message}</p>
-			</div>
+			</PostBottom>
 
-			<div className='post_image'>
+			<PostImage>
 				<img src={image} alt='' />
-			</div>
+			</PostImage>
 
-			<div className='post_options'>
-				<div className='post_option'>
+			<PostOptions>
+				<PostOption>
 					<ThumbUpIcon />
-				</div>
-				<div className='post_option'>
+				</PostOption>
+				<PostOption>
 					<ChatBubbleOutlineIcon />
-				</div>
-				<div className='post_option'>
+				</PostOption>
+				<PostOption>
 					<NearMeIcon />
-				</div>
-				<div className='post_option'>
+				</PostOption>
+				<PostOption>
 					<AccountCircleIcon />
 					<ExpandMoreOutlined />
-				</div>
-			</div>
-		</div>
+				</PostOption>
+			</PostOptions>
+		</PostContainer>
 	);
 };
 

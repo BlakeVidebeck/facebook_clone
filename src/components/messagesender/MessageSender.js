@@ -9,7 +9,15 @@ import VideoCamIcon from '@material-ui/icons/Videocam';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 
-import './MessageSender.css';
+import {
+	MessageSenderBottom,
+	MessageSenderContainer,
+	MessageSenderForm,
+	MessageSenderFormButton,
+	MessageSenderFormInput,
+	MessageSenderOption,
+	MessageSenderTop,
+} from './MessageSenderStyles';
 
 const MessageSender = () => {
 	const userInfo = useSelector((state) => state.userLogin.userInfo);
@@ -35,43 +43,42 @@ const MessageSender = () => {
 	};
 
 	return (
-		<div className='messageSender'>
-			<div className='messageSender_top'>
+		<MessageSenderContainer>
+			<MessageSenderTop>
 				<Avatar src={user.photoURL} />
-				<form>
-					<input
-						className='messageSender_input'
+				<MessageSenderForm>
+					<MessageSenderFormInput
 						placeholder={`What's on your mind ${user.displayName}?`}
 						value={input}
 						onChange={(e) => setInput(e.target.value)}
 					/>
-					<input
+					<MessageSenderFormInput
 						placeholder={`image URL (Optional)`}
 						value={imageUrl}
 						onChange={(e) => setImageUrl(e.target.value)}
 					/>
 
-					<button onClick={handleSubmit} type='submit'>
+					<MessageSenderFormButton onClick={handleSubmit} type='submit'>
 						Hidden submit
-					</button>
-				</form>
-			</div>
+					</MessageSenderFormButton>
+				</MessageSenderForm>
+			</MessageSenderTop>
 
-			<div className='messageSender_bottom'>
-				<div className='messageSender_option'>
+			<MessageSenderBottom>
+				<MessageSenderOption>
 					<VideoCamIcon style={{ color: 'red' }} />
 					<h3>Live Video</h3>
-				</div>
-				<div className='messageSender_option'>
+				</MessageSenderOption>
+				<MessageSenderOption>
 					<PhotoLibraryIcon style={{ color: 'green' }} />
 					<h3>Photo/Video</h3>
-				</div>
-				<div className='messageSender_option'>
+				</MessageSenderOption>
+				<MessageSenderOption>
 					<InsertEmoticonIcon style={{ color: 'orange' }} />
 					<h3>Feeling/Activity</h3>
-				</div>
-			</div>
-		</div>
+				</MessageSenderOption>
+			</MessageSenderBottom>
+		</MessageSenderContainer>
 	);
 };
 

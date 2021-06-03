@@ -6,7 +6,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-import './DropdownMenu.css';
+import { DropdownMenuContainer } from './DropdownMenuStyles';
 
 export default function Dropdown() {
 	const dispatch = useDispatch();
@@ -26,7 +26,7 @@ export default function Dropdown() {
 	};
 
 	return (
-		<div>
+		<DropdownMenuContainer>
 			<ExpandMoreIcon
 				aria-controls='simple-menu'
 				aria-haspopup='true'
@@ -35,7 +35,7 @@ export default function Dropdown() {
 				Open Menu
 			</ExpandMoreIcon>
 			<Menu
-				id='dropdown'
+				className='menu'
 				anchorEl={anchorEl}
 				keepMounted
 				open={Boolean(anchorEl)}
@@ -43,6 +43,6 @@ export default function Dropdown() {
 			>
 				<MenuItem onClick={handleLogout}>Logout</MenuItem>
 			</Menu>
-		</div>
+		</DropdownMenuContainer>
 	);
 }

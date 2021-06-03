@@ -3,17 +3,18 @@ import Feed from '../../components/feed/Feed';
 import Header from '../../components/header/Header';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Widgets from '../../components/widgets/Widgets';
+import { HomeScreenContainer } from './HomeScreenStyles';
 
 const HomeScreen = () => {
 	return (
-		<div>
+		<>
 			<Header />
-			<div className='app_body'>
+			<HomeScreenContainer>
 				<Sidebar />
 				<Feed />
 				<Widgets />
-			</div>
-		</div>
+			</HomeScreenContainer>
+		</>
 	);
 };
 

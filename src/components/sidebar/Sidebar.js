@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import SidebarRow from '../sidebarrow/SidebarRow';
 
@@ -12,14 +12,13 @@ import StorefrontIcon from '@material-ui/icons/Storefront';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 import { ExpandMoreOutlined } from '@material-ui/icons';
 
-import './Sidebar.css';
-
+import { SidebarContainer } from './SidebarStyles';
 const Sidebar = () => {
 	const userInfo = useSelector((state) => state.userLogin.userInfo);
 	const { user } = userInfo;
 
 	return (
-		<div className='sidebar'>
+		<SidebarContainer>
 			<Link to={`user/${user.uid}`}>
 				<SidebarRow src={user.photoURL} title={user.displayName} />
 			</Link>
@@ -33,7 +32,7 @@ const Sidebar = () => {
 			<SidebarRow Icon={StorefrontIcon} title='Marketplace' />
 			<SidebarRow Icon={VideoLibraryIcon} title='Videos' />
 			<SidebarRow Icon={ExpandMoreOutlined} title='Marketplace' />
-		</div>
+		</SidebarContainer>
 	);
 };
 

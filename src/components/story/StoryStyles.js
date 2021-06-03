@@ -1,4 +1,6 @@
-.story {
+import styled from 'styled-components';
+
+export const StoryContainer = styled.div`
 	position: relative;
 	background-position: center center;
 	background-size: cover;
@@ -10,20 +12,20 @@
 	margin-right: 10px;
 	transition: transform 100ms ease-in;
 	cursor: pointer;
-}
 
-.story:hover {
-	transform: scale(1.07);
-}
+	&:hover {
+		transform: scale(1.07);
+	}
 
-.story_avatar {
-	margin: 10px;
-	border: 5px solid #2e81f4;
-}
+	h4 {
+		position: absolute;
+		bottom: 20px;
+		left: 20px;
+		color: white;
+	}
 
-.story > h4 {
-	position: absolute;
-	bottom: 20px;
-	left: 20px;
-	color: white;
-}
+	& > .MuiAvatar-root {
+		margin: 10px;
+		border: 5px solid #2e81f4;
+	}
+`;
