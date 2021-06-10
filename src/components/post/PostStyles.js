@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const PostContainer = styled.div`
 	width: 100%;
 	margin-top: 15px;
-	border-radius: 15px;
+	border-radius: 8px;
 	background-color: white;
 	box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 075);
 `;

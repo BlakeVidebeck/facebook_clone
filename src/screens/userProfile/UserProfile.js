@@ -1,9 +1,26 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { getUserDetails } from '../../actions/userActions';
+import MessageSender from '../../components/messagesender/MessageSender';
 import Header from '../../components/header/Header';
 
-import './UserProfile.css';
+import FriendsList from '../../components/friendslist/FriendsList';
+import ProfileTabs from '../../components/profiletabs/ProfileTabs';
+import ProfilePosts from '../../components/profileposts/ProfilePosts';
+import {
+	AvatarContainer,
+	AvatarName,
+	BottomLeft,
+	BottomRight,
+	BottomSection,
+	Cover,
+	ProfileContainer,
+	ProfileFeed,
+	ProfileOptions,
+	ProfilePic,
+	TopSection,
+} from './UserProfileStyles';
 
 const UserProfile = ({ history }) => {
 	const dispatch = useDispatch();
@@ -25,25 +42,39 @@ const UserProfile = ({ history }) => {
 	return (
 		<>
 			<Header />
-			<div className='profile'>
+			<ProfileContainer>
 				{loading && 'Loading'}
-				<div className='top_section'>
-					{/* move to components folder */}
-					<div className='cover'>
+				<TopSection>
+					<Cover>
 						<span>cover photo</span>
-					</div>
-					<div className='avatar'>
-						<div className='profile_pic'>
+					</Cover>
+					<AvatarContainer>
+						<ProfilePic>
 							<img src={user.photoURL} alt='' />
-						</div>
-						<div className='avatar_name'>
+						</ProfilePic>
+						<AvatarName>
 							<h2>{user.displayName}</h2>
-						</div>
-					</div>
+						</AvatarName>
+					</AvatarContainer>
 
-					<div className='profile_tabs'></div>
-				</div>
-			</div>
+					<ProfileOptions>
+						<ProfileTabs />
+					</ProfileOptions>
+				</TopSection>
+
+				<BottomSection>
+					<BottomLeft>
+						<FriendsList />
+					</BottomLeft>
+
+					<BottomRight>
+						<ProfileFeed>
+							<MessageSender />
+							<ProfilePosts />
+						</ProfileFeed>
+					</BottomRight>
+				</BottomSection>
+			</ProfileContainer>
 		</>
 	);
 };

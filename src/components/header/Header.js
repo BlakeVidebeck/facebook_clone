@@ -48,19 +48,19 @@ const Header = () => {
 
 			{/* header center */}
 			<HeaderCenter>
-				<HeaderOption active>
+				<HeaderOption to='/' activeClassName='active'>
 					<HomeIcon fontSize='large' />
 				</HeaderOption>
-				<HeaderOption>
+				<HeaderOption to='/'>
 					<FlagIcon fontSize='large' />
 				</HeaderOption>
-				<HeaderOption>
+				<HeaderOption to='/'>
 					<SubscriptionsOutlinedIcon fontSize='large' />
 				</HeaderOption>
-				<HeaderOption>
+				<HeaderOption to='/'>
 					<StorefrontOutlinedIcon fontSize='large' />
 				</HeaderOption>
-				<HeaderOption>
+				<HeaderOption to='/'>
 					<SupervisedUserCircleIcon fontSize='large' />
 				</HeaderOption>
 			</HeaderCenter>

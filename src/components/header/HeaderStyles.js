@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 export const HeaderContainer = styled.div`
 	display: flex;
@@ -51,7 +51,7 @@ export const HeaderCenter = styled.div`
 	justify-content: center;
 `;
 
-export const HeaderOption = styled.div`
+export const HeaderOption = styled(NavLink)`
 	display: flex;
 	align-items: center;
 	padding: 0 30px;
@@ -73,11 +73,11 @@ export const HeaderOption = styled.div`
 		color: #2e81f4;
 	}
 
-	&active {
+	&.${(props) => props.activeClassName} {
 		border-bottom: 4px solid #2e81f4;
 	}
 
-	&active > .MuiSvgIcon-root {
+	&.${(props) => props.activeClassName} > .MuiSvgIcon-root {
 		color: #2e81f4;
 	}
 `;

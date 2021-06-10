@@ -48,7 +48,7 @@ const MessageSender = () => {
 				<Avatar src={user.photoURL} />
 				<MessageSenderForm>
 					<MessageSenderFormInput
-						placeholder={`What's on your mind ${user.displayName}?`}
+						placeholder={`What's on your mind?`}
 						value={input}
 						onChange={(e) => setInput(e.target.value)}
 					/>
