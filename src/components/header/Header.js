@@ -67,7 +67,7 @@ const Header = () => {
 
 			{/* header right */}
 			<HeaderRight>
-				<Link to={`user/${user.uid}`}>
+				<Link to={`/user/${user.uid}`}>
 					<HeaderInfo>
 						<Avatar src={user.photoURL} />
 						<h4>{user.displayName}</h4>

@@ -1,4 +1,4 @@
-import { auth, provider } from '../firebase';
+import db, { auth, provider } from '../firebase';
 
 export const signInWithGoogle = () => async (dispatch) => {
 	try {
@@ -6,11 +6,20 @@ export const signInWithGoogle = () => async (dispatch) => {
 			type: 'USER_LOGIN_REQUEST',
 		});
 
+		// logins in user with firebase
 		const authUser = await auth.signInWithPopup(provider);
+		const { user } = authUser;
 
 		dispatch({
 			type: 'USER_LOGIN_SUCCESS',
 			payload: authUser,
+		});
+
+		// saves user details in firestore
+		db.collection('users').doc(user.uid).set({
+			uid: user.uid,
+			username: user.displayName,
+			profilePic: user.photoURL,
 		});
 
 		// set the user object in local storage
@@ -33,19 +42,18 @@ export const logout = () => (dispatch) => {
 	dispatch({ type: 'USER_LOGOUT' });
 };
 
-export const getUserDetails = () => async (dispatch, getState) => {
+export const getUserDetails = (uid) => async (dispatch, getState) => {
 	try {
 		dispatch({
 			type: 'USER_DETAILS_REQUEST',
 		});
 
-		const {
-			userLogin: { userInfo },
-		} = getState();
+		const userRef = await db.collection('users').doc(uid).get();
+		const user = userRef.data();
 
 		dispatch({
 			type: 'USER_DETAILS_SUCCESS',
-			payload: userInfo,
+			payload: user,
 		});
 	} catch (error) {
 		dispatch({

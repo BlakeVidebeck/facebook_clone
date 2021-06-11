@@ -20,8 +20,11 @@ import {
 } from './MessageSenderStyles';
 
 const MessageSender = () => {
-	const userInfo = useSelector((state) => state.userLogin.userInfo);
-	const { user } = userInfo;
+	// get user info from the user login state to make sure they are logged in
+	const userLogin = useSelector((state) => state.userLogin);
+	const {
+		userInfo: { user },
+	} = userLogin;
 
 	const [input, setInput] = useState('');
 	const [imageUrl, setImageUrl] = useState('');

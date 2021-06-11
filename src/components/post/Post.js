@@ -29,7 +29,7 @@ const Post = ({
 					<Avatar src={profilePic} />
 				</PostAvatar>
 				<PostTopInfo>
-					<Link to={`user/${uid}`}>
+					<Link to={`/user/${uid}`}>
 						<h3>{username}</h3>
 					</Link>
 					<p>{new Date(timestamp?.toDate()).toUTCString()}</p>

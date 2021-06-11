@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getUserDetails } from '../../actions/userActions';
@@ -22,22 +22,35 @@ import {
 	TopSection,
 } from './UserProfileStyles';
 
-const UserProfile = ({ history }) => {
+const UserProfile = ({ history, location }) => {
+	const [username, setUsername] = useState('');
+	const [profilePic, setProfilePic] = useState('');
+
 	const dispatch = useDispatch();
+
+	// get user details from the user state
+	const userDetails = useSelector((state) => state.userDetails);
+	const { loading, user } = userDetails;
 
 	// get user info from the user login state to make sure they are logged in
 	const userLogin = useSelector((state) => state.userLogin);
-	const {
-		userInfo: { user, loading },
-	} = userLogin;
+	const { userInfo } = userLogin;
+
+	const userUid = location.pathname.split('/')[2];
 
 	useEffect(() => {
-		if (!user) {
+		if (!userInfo) {
 			history.push('/login');
 		} else {
-			dispatch(getUserDetails());
+			if (!user || !user.username || userUid !== user.uid) {
+				dispatch(getUserDetails(userUid));
+			} else {
+				setUsername(user.username);
+				setProfilePic(user.profilePic);
+				window.scrollTo(0, 0);
+			}
 		}
-	}, [dispatch, history, user]);
+	}, [dispatch, history, userInfo, userUid, user]);
 
 	return (
 		<>
@@ -50,10 +63,10 @@ const UserProfile = ({ history }) => {
 					</Cover>
 					<AvatarContainer>
 						<ProfilePic>
-							<img src={user.photoURL} alt='' />
+							<img src={profilePic} alt='' />
 						</ProfilePic>
 						<AvatarName>
-							<h2>{user.displayName}</h2>
+							<h2>{username}</h2>
 						</AvatarName>
 					</AvatarContainer>
 
