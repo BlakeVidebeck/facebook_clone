@@ -62,3 +62,29 @@ export const getUserDetails = (uid) => async (dispatch, getState) => {
 		});
 	}
 };
+
+export const getUserPosts = (uid) => async (dispatch) => {
+	try {
+		dispatch({
+			type: 'USER_POSTS_REQUEST',
+		});
+
+		db.collection('posts')
+			.where('uid', '==', uid)
+			.orderBy('timestamp', 'desc')
+			.onSnapshot((snapshot) =>
+				dispatch({
+					type: 'USER_POSTS_SUCCESS',
+					payload: snapshot.docs.map((doc) => ({
+						id: doc.id,
+						data: doc.data(),
+					})),
+				})
+			);
+	} catch (error) {
+		dispatch({
+			type: 'USER_POSTS_FAIL',
+			payload: error.message,
+		});
+	}
+};

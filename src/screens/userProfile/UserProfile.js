@@ -82,8 +82,8 @@ const UserProfile = ({ history, location }) => {
 
 					<BottomRight>
 						<ProfileFeed>
-							<MessageSender />
-							<ProfilePosts />
+							{userUid === userInfo.user.uid && <MessageSender />}
+							<ProfilePosts userUid={userUid} />
 						</ProfileFeed>
 					</BottomRight>
 				</BottomSection>

@@ -32,4 +32,19 @@ const userDetailsReducer = (state = {}, action) => {
 	}
 };
 
-export { userLoginReducer, userDetailsReducer };
+const userPostsReducer = (state = {}, action) => {
+	const { type, payload } = action;
+
+	switch (type) {
+		case 'USER_POSTS_REQUEST':
+			return { ...state, loading: true };
+		case 'USER_POSTS_SUCCESS':
+			return { loading: false, posts: payload };
+		case 'USER_POSTS_FAIL':
+			return { loading: false, error: payload };
+		default:
+			return state;
+	}
+};
+
+export { userLoginReducer, userDetailsReducer, userPostsReducer };

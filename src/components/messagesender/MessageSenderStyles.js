@@ -7,6 +7,7 @@ export const MessageSenderContainer = styled.div`
 	border-radius: 8px;
 	box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
 	width: 100%;
+	margin-bottom: 15px;
 `;
 
 export const MessageSenderTop = styled.div`
