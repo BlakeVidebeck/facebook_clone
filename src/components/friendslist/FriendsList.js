@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	Friend,
 	FriendGrid,
@@ -6,20 +6,28 @@ import {
 	FriendsContainer,
 } from './FriendsListStyles';
 
-const FriendsList = () => {
+const FriendsList = ({ userFriends }) => {
+	const [friends, setFriends] = useState([]);
+
+	useEffect(() => {
+		// turn object into array to map through
+		Object.keys(userFriends).forEach((friend) => {
+			setFriends([userFriends[friend]]);
+		});
+	}, [userFriends]);
+
 	return (
 		<FriendsContainer>
 			<span>Friends</span>
 			<FriendGrid>
-				<Friend>
-					<a href={`firend_url`}>
-						<FriendImage
-							src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F7%2F72%2FMatt_Berry_Headshot.jpg%2F1200px-Matt_Berry_Headshot.jpg&f=1&nofb=1'
-							alt=''
-						/>
-						<span>Matt Berry</span>
-					</a>
-				</Friend>
+				{friends.map((friend) => (
+					<Friend key={friend.uid}>
+						<a href={`/user/${friend.uid}`}>
+							<FriendImage src={friend.profilePic} alt='' />
+							<span>{friend.name}</span>
+						</a>
+					</Friend>
+				))}
 			</FriendGrid>
 		</FriendsContainer>
 	);

@@ -3,14 +3,16 @@ import styled from 'styled-components';
 export const ProfileTabsContainer = styled.div`
 	display: flex;
 	width: 50%;
+	height: 60px;
 	justify-content: space-evenly;
+	align-items: center;
 	border: none;
 `;
 
 export const ProfileTab = styled.div`
 	padding: 16px;
 	min-height: 16px;
-	height: 60px;
+	height: 40px;
 	border: none;
 	cursor: pointer;
 	display: flex;

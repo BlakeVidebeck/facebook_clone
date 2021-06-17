@@ -20,6 +20,7 @@ const ProfilePosts = ({ userUid }) => {
 				)
 			);
 	}, [userUid]);
+	console.log('render feed');
 
 	return (
 		<>

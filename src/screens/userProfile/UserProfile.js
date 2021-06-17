@@ -21,10 +21,12 @@ import {
 	ProfilePic,
 	TopSection,
 } from './UserProfileStyles';
+import FriendTabs from '../../components/friendtabs/FriendTabs';
 
 const UserProfile = ({ history, location }) => {
 	const [username, setUsername] = useState('');
 	const [profilePic, setProfilePic] = useState('');
+	const [userFriends, setUserFriends] = useState({});
 
 	const dispatch = useDispatch();
 
@@ -47,10 +49,13 @@ const UserProfile = ({ history, location }) => {
 			} else {
 				setUsername(user.username);
 				setProfilePic(user.profilePic);
+				setUserFriends(user.friends);
 				window.scrollTo(0, 0);
 			}
 		}
 	}, [dispatch, history, userInfo, userUid, user]);
+
+	console.log('render profile');
 
 	return (
 		<>
@@ -72,12 +77,13 @@ const UserProfile = ({ history, location }) => {
 
 					<ProfileOptions>
 						<ProfileTabs />
+						<FriendTabs friend={user} userInfo={userInfo} />
 					</ProfileOptions>
 				</TopSection>
 
 				<BottomSection>
 					<BottomLeft>
-						<FriendsList />
+						<FriendsList userFriends={userFriends} />
 					</BottomLeft>
 
 					<BottomRight>

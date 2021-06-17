@@ -47,4 +47,24 @@ const userPostsReducer = (state = {}, action) => {
 	}
 };
 
-export { userLoginReducer, userDetailsReducer, userPostsReducer };
+const userFriendReducer = (state = {}, action) => {
+	const { type, payload } = action;
+
+	switch (type) {
+		case 'USER_FRIEND_REQUEST':
+			return { ...state, loading: true };
+		case 'USER_FRIEND_SUCCESS':
+			return { loading: false, friend: payload };
+		case 'USER_FRIEND_FAIL':
+			return { loading: false, error: payload };
+		default:
+			return state;
+	}
+};
+
+export {
+	userLoginReducer,
+	userDetailsReducer,
+	userPostsReducer,
+	userFriendReducer,
+};

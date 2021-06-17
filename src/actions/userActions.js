@@ -15,12 +15,24 @@ export const signInWithGoogle = () => async (dispatch) => {
 			payload: authUser,
 		});
 
-		// saves user details in firestore
-		db.collection('users').doc(user.uid).set({
-			uid: user.uid,
-			username: user.displayName,
-			profilePic: user.photoURL,
-		});
+		const currentUser = await db
+			.collection('users')
+			.doc(user.uid)
+			.get()
+			.then((snapshot) => {
+				if (snapshot.exists) {
+					return true;
+				}
+			});
+
+		if (!currentUser) {
+			db.collection('users').doc(user.uid).set({
+				uid: user.uid,
+				username: user.displayName,
+				profilePic: user.photoURL,
+				friends: {},
+			});
+		}
 
 		// set the user object in local storage
 		localStorage.setItem('userInfo', JSON.stringify(authUser));
@@ -87,4 +99,47 @@ export const getUserPosts = (uid) => async (dispatch) => {
 			payload: error.message,
 		});
 	}
+};
+
+export const addFriend = (friend, user) => async (dispatch) => {
+	try {
+		dispatch({
+			type: 'USER_FRIEND_REQUEST',
+		});
+
+		const newFriend = await db
+			.collection('users')
+			.doc(user.uid)
+			.update({
+				['friends.' + friend.uid]: {
+					uid: friend.uid,
+					name: friend.username,
+					profilePic: friend.profilePic,
+				},
+			});
+
+		await db
+			.collection('users')
+			.doc(friend.uid)
+			.update({
+				['friends.' + user.uid]: {
+					uid: user.uid,
+					name: user.displayName,
+					profilePic: user.photoURL,
+				},
+			});
+
+		dispatch({
+			type: 'USER_FRIEND_SUCCESS',
+			payload: newFriend,
+		});
+	} catch (error) {
+		dispatch({
+			type: 'USER_FRIEND_FAIL',
+			payload: error.message,
+		});
+	}
+
+	// find user in db
+	// save friend details (name, pic, uid) in db
 };
